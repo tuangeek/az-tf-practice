@@ -16,7 +16,8 @@ jobs:
         working-directory: ./terraform/environment
     steps:
     - name: "Echo env"
-      run: echo "environment is $environment. TF_VAR_environment is $TF_VAR_environment. TF_VAR_location is $TF_VAR_location!"
+      run: |
+        echo "environment is $environment. TF_VAR_environment is $TF_VAR_environment. TF_VAR_location is $TF_VAR_location!"
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4
