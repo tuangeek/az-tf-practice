@@ -17,14 +17,17 @@ env:
   ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
 
 jobs:
-  terraform-plan:
-    name: 'Terraform Plan'
+  terraform-plan-dev:
+    name: 'Terraform Plan Dev'
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./az-backend
     outputs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
+    env:
+      TF_var_environment: "development"
+      TF_var_location: "eastus"
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
