@@ -2,6 +2,11 @@ name: 'Terraform Unit Tests'
 
 on:
   push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
 
 jobs:
   terraform-test-dev:
