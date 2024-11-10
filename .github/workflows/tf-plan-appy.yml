@@ -81,6 +81,12 @@ jobs:
           echo "</details>" >> $GITHUB_OUTPUT
           echo "${delimiter}" >> $GITHUB_OUTPUT
       
+      - name: Log Plan
+        env:
+          SUMMARY: "${{ steps.tf-plan-string.outputs.summary }}"
+        run: 
+          echo $SUMMARY
+        
       - name: View context attributes
         uses: actions/github-script@v7
         with:
