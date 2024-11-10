@@ -1,4 +1,4 @@
-name: 'Terraform Plan/Apply'
+name: 'Reusable Terraform Plan/Apply'
 
 on:
   workflow_call:
@@ -32,7 +32,7 @@ jobs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
     defaults:
       run:
-        working-directory: ./terraform/environment/development
+        working-directory: ./terraform/environment/${{ inputs.environment }}
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
