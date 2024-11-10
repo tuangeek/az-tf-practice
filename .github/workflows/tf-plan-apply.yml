@@ -6,6 +6,10 @@ on:
       environment:
         required: true
         type: string
+      autoApply:
+        required: false
+        type: boolean
+        default: false
     secrets:
       AZURE_CLIENT_ID:
         required: true
@@ -128,7 +132,7 @@ jobs:
     
   terraform-apply-dev:
     name: 'Terraform Apply'
-    if: github.ref == 'refs/heads/main' && needs.terraform-plan.outputs.tfplanExitCode == 2
+    if: github.ref == 'refs/heads/main' && needs.terraform-plan.outputs.tfplanExitCode == 2 || ${{ inputs.autoApply }} == true
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     needs: [terraform-plan-dev]
