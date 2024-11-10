@@ -152,11 +152,14 @@ jobs:
       with:
         name: tfplan
         path: "${{ env.WORKING_DIR }}/tfplan"
+
+    - name: Terraform List Dir
+      run: |
+        ls -la
         
     # Terraform Apply
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
-
 
     # Save plan to artifacts  
     - name: Publish Terraform Plan
