@@ -29,6 +29,12 @@ resource "azurerm_storage_account" "sa" {
   }
   shared_access_key_enabled = false
   allow_nested_items_to_be_public = false
+
+  blob_properties {
+    delete_retention_policy {
+      days = 30
+    }
+  }
 }
 
 # virtual network
