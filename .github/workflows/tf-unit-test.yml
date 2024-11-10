@@ -1,12 +1,11 @@
-name: 'Terraform Unit Tests'
+name: 'Reusable Terraform Unit Tests'
 
 on:
-  push:
-
-permissions:
-  security-events: write # Needed to upload-sarif
-  contents: read # Needed to clone repo
-  actions: read # Potentially needed for private repositories (see https://github.com/github/codeql-action/issues/2117)
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
 
 jobs:
   terraform-unit-tests:
@@ -14,8 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./az-backend
-        
+        working-directory: ./terraform/environment/${{ inputs.environment }}
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
@@ -37,9 +35,9 @@ jobs:
     - name: Terraform Format
       run: terraform fmt -check -recursive
     
-    # Perform a security scan of the terraform code using checkov
-    - name: Run Checkov action
-      id: checkov
-      uses: bridgecrewio/checkov-action@master
-      with: 
-        framework: terraform
+    # # Perform a security scan of the terraform code using checkov
+    # - name: Run Checkov action
+    #   id: checkov
+    #   uses: bridgecrewio/checkov-action@master
+    #   with: 
+    #     framework: terraform

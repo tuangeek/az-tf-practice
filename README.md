@@ -26,3 +26,18 @@ example:
   "tenant": "11f10936-f7bc-4227-95e4-4b0b7b4bdb69"
 }
 ```
+
+
+## Resource Group
+
+Create a [resource group using TF](terraform/az-backend/main.tf#8)
+
+
+## Create Storage Account
+
+Create a [storage account using TF](terraform/az-backend/main.tf#13)
+
+
+## Deployment Proection Rules
+
+TODO
