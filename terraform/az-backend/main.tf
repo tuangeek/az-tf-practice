@@ -35,6 +35,8 @@ resource "azurerm_storage_account" "sa" {
       days = 30
     }
   }
+
+  prevent_destroy = true
 }
 
 /*
