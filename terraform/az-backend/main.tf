@@ -27,4 +27,20 @@ resource "azurerm_storage_account" "sa" {
       retention_policy_days = 10
     }
   }
+  shared_access_key_enabled = false
+  allow_nested_items_to_be_public = false
+}
+
+resource "azurerm_private_endpoint" "endpoint" {
+  name                 = "tfbackend${var.environment}-pe"
+  location             = azurerm_resource_group.sa.location
+  resource_group_name  = azurerm_resource_group.sa.name
+  subnet_id            = azurerm_subnet.sa.id
+
+  private_service_connection {
+    name                           = "tf_backend_${var.environment}_psc"
+    is_manual_connection           = false
+    private_connection_resource_id = azurerm_storage_account.sa.id
+    subresource_names              = ["blob"]
+  }
 }
