@@ -152,11 +152,12 @@ jobs:
       with:
         name: tfplan
         path: "${{ env.WORKING_DIR }}/tfplan"
-
+        merge-multiple: true
+        
     - name: Terraform List Dir
       run: |
         ls -la
-        
+
     # Terraform Apply
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
