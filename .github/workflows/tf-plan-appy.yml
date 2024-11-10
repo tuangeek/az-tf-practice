@@ -92,7 +92,7 @@ jobs:
             script: |
               const body = `${process.env.SUMMARY}`;
               github.rest.issues.createComment({
-                  issue_number: context.pulls.ref_name,
+                  issue_number: context.pulls.ref,
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   body: body
