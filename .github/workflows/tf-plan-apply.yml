@@ -130,7 +130,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     needs: [terraform-plan-dev]
-    
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIR }}
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
@@ -160,4 +162,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: "tfstate-${{ inputs.environment }}"
-        path: terraform.tfstate
+        path: "${{ env.WORKING_DIR }}/terraform.tfstate"
