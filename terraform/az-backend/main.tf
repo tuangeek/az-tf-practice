@@ -18,11 +18,13 @@ resource "azurerm_storage_account" "sa" {
   account_replication_type = "GRS"
   public_network_access_enabled = false
   min_tls_version          = "TLS1_2"
-  logging {
-        delete                = true
-        read                  = true
-        write                 = true
-        version               = "1.0"
-        retention_policy_days = 10
+  queue_properties {
+    logging {
+      delete                = true
+      read                  = true
+      write                 = true
+      version               = "1.0"
+      retention_policy_days = 10
     }
+  }
 }
