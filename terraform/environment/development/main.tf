@@ -2,6 +2,13 @@
 
 provider "azurerm" {
   features {}
+  default_tags {
+    tags = {
+      Environment = "development"
+      Name        = "Default Provider"
+      Project     = "TF AZ Practice"
+    }
+  }
 }
 
 module "az-backend" {
