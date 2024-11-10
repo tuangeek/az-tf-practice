@@ -7,4 +7,5 @@ resource "azurerm_resource_group" "rg" {
 
 resource "random_pet" "rg_name" {
   prefix = "az-backend-storage-${var.environment}"
+  separator = "-"
 }
