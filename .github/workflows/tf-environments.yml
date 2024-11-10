@@ -8,7 +8,11 @@ on:
     branches:
     - main
   workflow_dispatch:
-    
+    inputs:
+      autoApply:
+        description: 'Autoapply terraform changes'
+        required: false
+  
 jobs:
   # Environment: development
   terraform-test-dev:
