@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./az-backend
+        working-directory: ./terraform/environment
     outputs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
     env:

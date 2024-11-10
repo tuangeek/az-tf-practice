@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./az-backend
+        working-directory: ./terraform/environment
         
     steps:
     # Checkout the repository to the GitHub Actions runner
