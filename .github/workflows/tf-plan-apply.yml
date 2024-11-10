@@ -26,6 +26,8 @@ env:
   ARM_CLIENT_SECRET: "${{ secrets.AZURE_CLIENT_SECRET }}"
   ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
   ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
+  WORKING_DIR: "./terraform/environment/${{ inputs.environment }}"
+
 
 jobs:
   terraform-plan-dev:
@@ -36,7 +38,7 @@ jobs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
     defaults:
       run:
-        working-directory: ./terraform/environment/${{ inputs.environment }}
+        working-directory: $WORKING_DIR
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
@@ -80,8 +82,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: tfplan
-          path: ./tfplan
-          
+          path: "$WORKING_DIRtfplan/tfplan"
+          if-no-files-found: error
+
       # Create string output of Terraform Plan
       - name: Create String Output
         id: tf-plan-string
@@ -137,7 +140,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     needs: [terraform-plan-dev]
-    
+    defaults:
+      run:
+        working-directory: $WORKING_DIR
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
