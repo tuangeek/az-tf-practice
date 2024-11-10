@@ -28,7 +28,7 @@ env:
   ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
   WORKING_DIR: "./terraform/environment/${{ inputs.environment }}"
 
-
+  
 jobs:
   terraform-plan-dev:
     name: 'Terraform Plan Dev'
@@ -38,7 +38,7 @@ jobs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
     defaults:
       run:
-        working-directory: $WORKING_DIR
+        working-directory: ${{ env.WORKING_DIR }}
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
@@ -82,7 +82,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: tfplan
-          path: "$WORKING_DIRtfplan/tfplan"
+          path: "${{ env.WORKING_DIR }}/tfplan"
           if-no-files-found: error
 
       # Create string output of Terraform Plan
@@ -105,16 +105,6 @@ jobs:
       - name: Log Plan
         run: 
           terraform show tfplan
-        
-      - name: View context attributes
-        uses: actions/github-script@v7
-        with:
-          script: console.log(context)
-
-      - name: List comments
-        uses: actions/github-script@v7
-        with:
-          script: console.log(context)
       
       # If this is a PR post the changes
       - name: Push Terraform Output to PR
@@ -140,9 +130,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     needs: [terraform-plan-dev]
-    defaults:
-      run:
-        working-directory: $WORKING_DIR
+    
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
