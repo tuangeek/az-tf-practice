@@ -5,7 +5,7 @@ on:
 
 jobs:
   terraform-plan-dev:
-    uses: ./.github/workflows//tf-unit-test-resuable.yml
+    uses: ./.github/workflows/tf-unit-test-resuable.yml
     with:
         environment: "development"
     secrets: inherit
