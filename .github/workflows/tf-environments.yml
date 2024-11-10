@@ -24,15 +24,15 @@ jobs:
     secrets: inherit
 
   # Environment: test
-
   terraform-test-test:
+    needs: [terraform-plan-apply-dev]
     name: "Test Test"
     uses: ./.github/workflows/tf-unit-test.yml
     with:
         environment: "test"
   terraform-plan-apply-test:
     name: "Plan Test"
-    needs: [terraform-test-dev]
+    needs: [terraform-test-test]
     uses: ./.github/workflows/tf-plan-apply.yml
     with:
         environment: "test"
