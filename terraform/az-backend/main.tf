@@ -7,7 +7,7 @@ resource "random_pet" "rg_name" {
 
 resource "azurerm_resource_group" "rg" {
   location = var.location
-  name     = random_pet.rg_name.id
+  name     = "az-backend-storage-${var.environment}-rg"
 }
 
 resource "azurerm_storage_account" "sa" {
@@ -42,13 +42,14 @@ resource "azurerm_storage_account" "sa" {
 }
 
 
+/* 
 resource "azurerm_management_lock" "rg-lock" {
   name       = "tfbackend${var.environment}"
   scope      = azurerm_resource_group.rg.id
   lock_level = "CanNotDelete"
   notes      = "Items can't be deleted in this subscription!"
 }
-
+*/
 
 /*
 
