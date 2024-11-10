@@ -14,6 +14,7 @@ jobs:
         uses: ./.github/workflows/tf-unit-tests.yml
         with:
             environment: "development"
+            location: "eastus"
     terraform-unit-tests-test:
         name: 'Terraform Unit Tests - test'
         uses: ./.github/workflows/tf-unit-tests.yml

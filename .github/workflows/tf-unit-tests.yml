@@ -6,6 +6,9 @@ on:
       environment:
         required: true
         type: string
+      location:
+        required: true
+        type: string
 
 permissions:
   security-events: write # Needed to upload-sarif
@@ -16,7 +19,9 @@ jobs:
   terraform-unit-tests:
     name: 'Terraform Unit Tests'
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment}}
+    env: 
+      TF_VAR_environment: ${{ inputs.environment}}
+      TF_VAR_location: ${{ inputs.location }}
     defaults:
       run:
         working-directory: ./terraform/environment
