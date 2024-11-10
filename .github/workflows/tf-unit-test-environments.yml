@@ -1,0 +1,11 @@
+name: 'Terraform Unit Tests'
+
+on:
+  push:
+
+jobs:
+  terraform-plan-dev:
+    uses: ./.github/workflows/tf-unit-test.yml
+    with:
+        environment: "development"
+    secrets: inherit
