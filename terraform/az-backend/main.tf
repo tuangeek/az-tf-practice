@@ -31,11 +31,39 @@ resource "azurerm_storage_account" "sa" {
   allow_nested_items_to_be_public = false
 }
 
+# virtual network
+resource "azurerm_virtual_network" "vn" {
+  name                = "tfbackend${var.environment}-vn"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+}
+
+# subnet group
+resource "azurerm_subnet" "subnet" {
+  name                 = "tfbackend${var.environment}"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vn.name
+  address_prefixes     = ["10.0.1.0/24"]
+
+  delegation {
+    name = "delegation"
+
+    service_delegation {
+      name    = "Microsoft.ContainerInstance/containerGroups"
+      actions = [
+        "Microsoft.Network/virtualNetworks/subnets/join/action", 
+        "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"
+      ]
+    }
+  }
+}
+
 resource "azurerm_private_endpoint" "endpoint" {
   name                 = "tfbackend${var.environment}-pe"
-  location             = azurerm_resource_group.sa.location
-  resource_group_name  = azurerm_resource_group.sa.name
-  subnet_id            = azurerm_subnet.sa.id
+  location             = azurerm_resource_group.rg.location
+  resource_group_name  = azurerm_resource_group.rg.name
+  subnet_id            = azurerm_subnet.subnet.id
 
   private_service_connection {
     name                           = "tf_backend_${var.environment}_psc"
