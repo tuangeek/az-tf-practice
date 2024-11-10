@@ -4,6 +4,17 @@ on:
   push:
 
 jobs:
+  greet-dev:
+    name: 'Greeting'
+    runs-on: ubuntu-latest
+    env:
+      environment: "development"
+      TF_VAR_environment: "development"
+      TF_VAR_location: "eastus"
+    steps:
+    - name: "Echo env"
+      run: |
+        echo "environment is $environment. TF_VAR_environment is $TF_VAR_environment. TF_VAR_location is $TF_VAR_location!"
   terraform-unit-tests-dev:
     name: 'Terraform Unit Tests'
     runs-on: ubuntu-latest
