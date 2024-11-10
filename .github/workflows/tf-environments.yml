@@ -11,7 +11,9 @@ on:
     inputs:
       autoApply:
         description: 'Autoapply terraform changes'
+        type: boolean
         required: false
+        default: false
   
 jobs:
   # Environment: development
