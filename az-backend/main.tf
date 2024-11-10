@@ -1,0 +1,10 @@
+# create a new resource group for the project
+
+#resource "azurerm_resource_group" "rg" {
+#  location = var.resource_group_location
+#  name     = random_pet.rg_name.id
+#}
+
+resource "random_name" "rg_name" {
+  prefix = "az-backend-storage"
+}
