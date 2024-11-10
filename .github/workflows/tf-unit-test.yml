@@ -1,0 +1,11 @@
+name: 'Terraform Unit Tests'
+
+on:
+  push:
+
+jobs:
+  terraform-plan-dev:
+    uses: ./tf-unit-test-resuable.yml
+    with:
+        environment: "development"
+    secrets: inherit
