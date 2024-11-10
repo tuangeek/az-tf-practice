@@ -37,6 +37,8 @@ resource "azurerm_storage_account" "sa" {
   }
 }
 
+/*
+
 # virtual network
 resource "azurerm_virtual_network" "vn" {
   name                = "tfbackend${var.environment}-vn"
@@ -78,3 +80,5 @@ resource "azurerm_private_endpoint" "endpoint" {
     subresource_names              = ["blob"]
   }
 }
+
+*/
