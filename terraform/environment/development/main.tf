@@ -6,6 +6,6 @@ provider "azurerm" {
 
 module "az-backend" {
   source      = "../../az-backend"
-  location    = "development"
-  environment = "eastus"
+  environment = "development"
+  location    = "eastus"
 }
