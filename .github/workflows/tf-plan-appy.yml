@@ -5,12 +5,19 @@ on:
 
 #These environment variables are used by the terraform azure provider to setup OIDD authenticate. 
 env:
-  AZURE_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID }}"
+  ARM_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID }}"
   ARM_CLIENT_SECRET: "${{ secrets.ARM_CLIENT_SECRET }}"
-  AZURE_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
-  AZURE_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
+  ARM_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+  ARM_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
 
 jobs:
+  echo-env:
+    name: 'Terraform Plan Dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: "echo env"
+        run: |
+          echo "ARM_CLIENT_ID is $ARM_CLIENT_ID. ARM_SUBSCRIPTION_ID is $ARM_SUBSCRIPTION_ID."
   terraform-plan-dev:
     name: 'Terraform Plan Dev'
     runs-on: ubuntu-latest
