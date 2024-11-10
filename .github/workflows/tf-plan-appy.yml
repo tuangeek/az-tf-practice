@@ -20,9 +20,6 @@ jobs:
   terraform-plan-dev:
     name: 'Terraform Plan Dev'
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./terraform/environment
     outputs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
     env:

@@ -1,7 +1,11 @@
 name: 'Terraform Unit Tests'
 
 on:
-  push:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
 
 permissions:
   security-events: write # Needed to upload-sarif
@@ -12,10 +16,10 @@ jobs:
   terraform-unit-tests:
     name: 'Terraform Unit Tests'
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment}}
     defaults:
       run:
         working-directory: ./terraform/environment
-        
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
