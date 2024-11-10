@@ -42,14 +42,14 @@ resource "azurerm_storage_account" "sa" {
 }
 
 
-/* 
-resource "azurerm_management_lock" "rg-lock" {
+
+resource "azurerm_management_lock" "backend-lock" {
   name       = "tfbackend${var.environment}"
-  scope      = azurerm_resource_group.rg.id
+  scope      = azurerm_storage_account.sa.id
   lock_level = "CanNotDelete"
-  notes      = "Items can't be deleted in this subscription!"
+  notes      = "TF Backend can't be deleted in this subscription!"
 }
-*/
+
 
 /*
 
