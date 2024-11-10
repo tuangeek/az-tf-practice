@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
+    defaults:
+      run:
+        working-directory: ./terraform/environment/development
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
