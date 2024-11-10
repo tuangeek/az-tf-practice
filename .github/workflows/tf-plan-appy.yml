@@ -2,6 +2,11 @@ name: 'Terraform Plan/Apply'
 
 on:
   push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
 
 #These environment variables are used by the terraform azure provider to setup OIDD authenticate. 
 env:
@@ -82,10 +87,8 @@ jobs:
           echo "${delimiter}" >> $GITHUB_OUTPUT
       
       - name: Log Plan
-        env:
-          SUMMARY: "${{ steps.tf-plan-string.outputs.summary }}"
         run: 
-          echo $SUMMARY
+          terraform show
         
       - name: View context attributes
         uses: actions/github-script@v7
