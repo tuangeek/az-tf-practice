@@ -7,13 +7,6 @@ on:
   pull_request:
     branches:
     - main
-  workflow_dispatch:
-    inputs:
-      autoApply:
-        description: 'Autoapply terraform changes'
-        type: boolean
-        required: false
-        default: false
   
 jobs:
   # Environment: development
@@ -28,7 +21,7 @@ jobs:
     uses: ./.github/workflows/tf-plan-apply.yml
     with:
         environment: "development"
-        autoApply: ${{ inputs.autoApply }}
+        autoApply: true
     secrets: inherit
 
   # Environment: test
@@ -44,6 +37,6 @@ jobs:
     uses: ./.github/workflows/tf-plan-apply.yml
     with:
         environment: "test"
-        autoApply: ${{ inputs.autoApply }}
+        autoApply: false
     secrets: inherit
   
