@@ -1,11 +1,7 @@
 name: 'Terraform Plan/Apply'
 
 on:
-  workflow_call:
-    inputs:
-      environment:
-        required: true
-        type: string
+  push:
 
 #These environment variables are used by the terraform azure provider to setup OIDD authenticate. 
 env:
@@ -20,7 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
-    environment: ${{ inputs.environment}}
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
