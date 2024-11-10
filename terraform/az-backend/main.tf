@@ -36,7 +36,9 @@ resource "azurerm_storage_account" "sa" {
     }
   }
 
-  prevent_destroy = true
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 /*
