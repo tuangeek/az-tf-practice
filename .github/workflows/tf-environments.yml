@@ -12,7 +12,7 @@ jobs:
   terraform-plan-apply-dev:
     name: "Plan Dev"
     needs: [terraform-test-dev]
-    uses: ./.github/workflows/tf-unit-test.yml
+    uses: ./.github/workflows/tf-plan-apply.yml
     with:
         environment: "development"
     secrets: inherit
