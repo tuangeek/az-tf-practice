@@ -1,12 +1,20 @@
 name: 'Terraform Plan/Apply'
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+    secrets:
+      AZURE_CLIENT_ID:
+        required: true
+      AZURE_CLIENT_SECRET:
+        required: true
+      AZURE_SUBSCRIPTION_ID:
+        required: true
+      AZURE_TENANT_ID:
+        required: true
 
 #These environment variables are used by the terraform azure provider to setup OIDD authenticate. 
 env:
@@ -19,7 +27,7 @@ jobs:
   terraform-plan-dev:
     name: 'Terraform Plan Dev'
     runs-on: ubuntu-latest
-    environment: development
+    environment: ${{ inputs.environment }}
     outputs:
       tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
     defaults:
@@ -122,7 +130,7 @@ jobs:
     name: 'Terraform Apply'
     if: github.ref == 'refs/heads/main' && needs.terraform-plan.outputs.tfplanExitCode == 2
     runs-on: ubuntu-latest
-    environment: development
+    environment: ${{ inputs.environment }}
     needs: [terraform-plan-dev]
     
     steps:
