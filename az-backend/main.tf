@@ -5,6 +5,6 @@
 #  name     = random_pet.rg_name.id
 #}
 
-resource "random_name" "rg_name" {
+resource "random_pet" "rg_name" {
   prefix = "az-backend-storage"
 }
