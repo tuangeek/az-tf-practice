@@ -36,3 +36,8 @@ Create a [resource group using TF](terraform/az-backend/main.tf#8)
 ## Create Storage Account
 
 Create a [storage account using TF](terraform/az-backend/main.tf#13)
+
+
+## Deployment Proection Rules
+
+TODO
