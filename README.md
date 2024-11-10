@@ -30,9 +30,9 @@ example:
 
 ## Resource Group
 
-Create a [resource group using TF](terraform/az-backend/main.tf#3)
+Create a [resource group using TF](terraform/az-backend/main.tf#8)
 
 
 ## Create Storage Account
 
-Create a [storage account using TF](terraform/az-backend/main.tf#3)
+Create a [storage account using TF](terraform/az-backend/main.tf#13)
