@@ -9,8 +9,13 @@ permissions:
   actions: read # Potentially needed for private repositories (see https://github.com/github/codeql-action/issues/2117)
 
 jobs:
-  terraform-unit-tests-dev:
-    name: 'Terraform Unit Tests'
-    uses: ./.github/workflows/tf-unit-tests.yml
-    with:
-      environment: "development"
+    terraform-unit-tests-dev:
+        name: 'Terraform Unit Tests - development'
+        uses: ./.github/workflows/tf-unit-tests.yml
+        with:
+            environment: "development"
+    terraform-unit-tests-test:
+        name: 'Terraform Unit Tests - test'
+        uses: ./.github/workflows/tf-unit-tests.yml
+        with:
+            environment: "test"
