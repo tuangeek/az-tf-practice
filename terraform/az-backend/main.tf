@@ -1,10 +1,5 @@
 # create a new resource group for the project
 
-resource "random_pet" "rg_name" {
-  prefix = "az-backend-storage-${var.environment}-rg"
-  separator = "-"
-}
-
 resource "azurerm_resource_group" "rg" {
   location = var.location
   name     = "az-backend-storage-${var.environment}-rg"
@@ -27,7 +22,7 @@ resource "azurerm_storage_account" "sa" {
       retention_policy_days = 10
     }
   }
-  shared_access_key_enabled = false
+  shared_access_key_enabled = true
   allow_nested_items_to_be_public = false
 
   blob_properties {
@@ -41,6 +36,12 @@ resource "azurerm_storage_account" "sa" {
   }
 }
 
+
+resource "azurerm_storage_container" "tf-states" {
+  name                  = "tf-states-container"
+  storage_account_id  = azurerm_storage_account.sa.id
+  container_access_type = "private"
+}
 
 
 resource "azurerm_management_lock" "backend-lock" {
