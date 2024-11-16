@@ -1,17 +1,12 @@
 name: 'Terraform Unit Tests'
 
 on:
-  # push:
-  #   branches:
-  #   - main
-  # pull_request:
-  #   branches:
-  #   - main
-  workflow_dispatch:
-    inputs:
-      autoApply:
-        description: 'Autoapply terraform changes'
-        required: false
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
   
 jobs:
   # Environment: development
@@ -26,7 +21,7 @@ jobs:
     uses: ./.github/workflows/tf-plan-apply.yml
     with:
         environment: "development"
-        autoApply: ${{ inputs.autoApply }}
+        autoApply: true
     secrets: inherit
 
   # Environment: test
@@ -42,6 +37,6 @@ jobs:
     uses: ./.github/workflows/tf-plan-apply.yml
     with:
         environment: "test"
-        autoApply: ${{ inputs.autoApply }}
+        autoApply: false
     secrets: inherit
   
