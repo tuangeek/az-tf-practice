@@ -49,6 +49,13 @@ Create a [resource group using TF](terraform/az-backend/main.tf#8)
 
 Create a [storage account using TF](terraform/az-backend/main.tf#13)
 
+## Registering Resource Provider
+
+1. Got to subscription
+2. Settings
+3. Resource providers
+4. Click the resource to register
+5. Register
 
 ## Deployment Proection Rules
 

@@ -6,13 +6,14 @@ data "azurerm_subscription" "primary" {
 data "azurerm_client_config" "this" {
 }
 
+/* 
 resource "azurerm_role_assignment" "example" {
   scope                = data.azurerm_subscription.primary.id
   role_definition_name = "Container Registry Repository Writer"
   principal_id         = data.azurerm_client_config.this.object_id
 }
 
-/* 
+
 # create application and principal
 
 locals {

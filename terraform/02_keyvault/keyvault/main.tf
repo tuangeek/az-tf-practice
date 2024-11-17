@@ -16,8 +16,11 @@ resource "azurerm_key_vault" "kv" {
   soft_delete_retention_days  = 7
   purge_protection_enabled    = false
 
+  enable_rbac_authorization   = true
   sku_name = "standard"
 }
+
+/*
 
 # allow service principal
 resource "azurerm_key_vault_access_policy" "allow_sp" {
@@ -41,7 +44,7 @@ resource "azurerm_key_vault_access_policy" "allow_sp" {
     ]
 }
 
-/*
+
 # give service principal wirte access
 resource "azurerm_role_assignment" "this" {
     scope                = data.azurerm_subscription.primary.id
