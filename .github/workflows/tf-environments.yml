@@ -23,7 +23,7 @@ jobs:
     with:
         environment: "development"
         autoApply: true
-        workingDir: "./terraform/01_backend/environment/test"
+        workingDir: "./terraform/01_backend/environment/development"
     secrets: inherit
 
   # Environment: test
