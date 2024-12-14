@@ -11,5 +11,4 @@ module "container-app" {
   image         = "appregistrydevelopmentacr.azurecr.io/streamlit"
   registry_name = "appregistry${local.environment}acr"
   registry_rg   = "rg-container-registry-${local.environment}"
-  registry_pull_identity = "registry-identity-user-${local.environment}"
 }

@@ -19,11 +19,6 @@ variable "registry_rg"{
     description = "Registry resource group"
 }
 
-variable "registry_pull_identity" {
-    type = string
-    description = "Registry identity to pull image"
-}
-
 variable "prefix" {
     type = string
     default = "streamlit-app"

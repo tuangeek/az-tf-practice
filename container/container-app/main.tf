@@ -24,10 +24,17 @@ data "azurerm_container_registry" "acr" {
   resource_group_name      = var.registry_rg
 }
 
-data "azurerm_user_assigned_identity" "containerapp" {
-  name                     = var.registry_pull_identity
-  resource_group_name      = var.registry_rg
+resource "azurerm_user_assigned_identity" "user" {
+  name                = "id-${var.prefix}-${var.environment}"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
 }
+
+# resource "azurerm_role_assignment" "containerapp" {
+#   scope                = azurerm_container_registry.acr.id
+#   role_definition_name = "acrpull"
+#   principal_id         = azurerm_user_assigned_identity.containerapp.principal_id
+# }
 
 resource "azurerm_container_app" "ca" {
   name                         = "ca-${var.prefix}-${var.environment}"
@@ -38,13 +45,13 @@ resource "azurerm_container_app" "ca" {
   identity {
     type         = "UserAssigned"
     identity_ids = [
-      data.azurerm_user_assigned_identity.containerapp.id
+      azurerm_user_assigned_identity.user.id
     ]
   }
  
   registry {
     server   = data.azurerm_container_registry.acr.login_server
-    identity = data.azurerm_user_assigned_identity.containerapp.id
+    identity = azurerm_user_assigned_identity.user.id
   }
 
   template {

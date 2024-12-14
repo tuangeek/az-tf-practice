@@ -13,8 +13,7 @@ jobs:
   terraform-test-dev:
     name: "Test Dev"
     uses: ./.github/workflows/tf-unit-test.yml
-    with:
-        environment: "development"
+    
   terraform-plan-apply-dev:
     name: "Plan Dev"
     needs: [terraform-test-dev]
