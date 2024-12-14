@@ -6,14 +6,16 @@ on:
       environment:
         required: true
         type: string
-
+      workingDir:
+        required: true
+        type: string
 jobs:
   terraform-unit-tests:
     name: 'Terraform Unit Tests'
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./terraform/environment/${{ inputs.environment }}
+        working-directory: ${{ inputs.workingDir }}
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout

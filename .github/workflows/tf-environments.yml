@@ -10,10 +10,12 @@ on:
   
 jobs:
   # Environment: development
-  terraform-test-dev:
-    name: "Test Dev"
+  terraform-test:
+    name: "Test Terraform"
     uses: ./.github/workflows/tf-unit-test.yml
-    
+    with: 
+      environment: "development"
+      workingDir: "./terraform/01_backend/environments/development"
   terraform-plan-apply-dev:
     name: "Plan Dev"
     needs: [terraform-test-dev]
