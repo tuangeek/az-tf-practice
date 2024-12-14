@@ -10,7 +10,7 @@ on:
   
 jobs:
   # Environment: development
- terraform-test-dev:
+  terraform-test-dev:
     name: "Test Terraform"
     uses: ./.github/workflows/tf-unit-test.yml
     with: 
