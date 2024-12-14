@@ -23,6 +23,7 @@ jobs:
     with:
         environment: "development"
         autoApply: true
+        workingDir: "./terraform/01_backend/environment/test"
     secrets: inherit
 
   # Environment: test
@@ -40,5 +41,6 @@ jobs:
     with:
         environment: "test"
         autoApply: false
+        workingDir: "./terraform/01_backend/environment/test"
     secrets: inherit
   
