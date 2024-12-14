@@ -15,7 +15,7 @@ jobs:
     uses: ./.github/workflows/tf-unit-test.yml
     with: 
       environment: "development"
-      workingDir: "./terraform/01_backend/environments/development"
+      workingDir: "./terraform/01_backend/environment/development"
   terraform-plan-apply-dev:
     name: "Plan Dev"
     needs: [terraform-test-dev]
@@ -32,7 +32,7 @@ jobs:
     uses: ./.github/workflows/tf-unit-test.yml
     with:
         environment: "test"
-        workingDir: "./terraform/01_backend/environments/test"
+        workingDir: "./terraform/01_backend/environment/test"
   terraform-plan-apply-test:
     name: "Plan Test"
     needs: [terraform-test-test]
